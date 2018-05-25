@@ -28,8 +28,8 @@ module.exports = class DbSchedule extends Schedule {
    * 比如 `return '0 17 ? * 0,4-6'`
    */
   get rule() {
-    const rule = new Schedule.rule();
-    rule.dayOfWeek = [0, new schedule.Range(4, 6)];
+    const rule = new Schedule.RecurrenceRule();
+    rule.dayOfWeek = [0, new Schedule.Range(4, 6)];
     rule.hour = 17;
     rule.minute = 0;
     return rule;

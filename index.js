@@ -10,10 +10,6 @@ module.exports = class Schedule {
     this.schedule = schedule.scheduleJob(this.rule, this._handler(this.task.bind(this)));
   }
   
-  static get rule() {
-    return schedule.RecurrenceRule;
-  }
-  
   _handler(fn) {
     return () => {
       this.status = 1;
@@ -46,7 +42,12 @@ module.exports = class Schedule {
             }
           }, 50);
         })
+      } else {
+        this.schedule.cancel();
       }
     }
   }
 };
+
+module.exports.RecurrenceRule = schedule.RecurrenceRule;
+module.exports.Range = schedule.Range;
