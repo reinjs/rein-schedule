@@ -27,7 +27,7 @@ module.exports = class DbSchedule extends Schedule {
    * 此属性可以直接用字符串表示
    * 比如 `return '0 17 ? * 0,4-6'`
    */
-  get rule() {
+  rule() {
     const rule = new Schedule.RecurrenceRule();
     rule.dayOfWeek = [0, new Schedule.Range(4, 6)];
     rule.hour = 17;

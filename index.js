@@ -5,9 +5,12 @@ module.exports = class Schedule {
   constructor(app) {
     this.app = app;
     this.status = 0;
-    if (!this.rule) throw new Error('请先设置任务时间规则');
-    if (!this.task) throw new Error('请先设置任务逻辑函数');
-    this.schedule = schedule.scheduleJob(this.rule, this._handler(this.task.bind(this)));
+
+    app.ready( () => {
+      if (!this.rule) throw new Error('请先设置任务时间规则');
+      if (!this.task) throw new Error('请先设置任务逻辑函数');
+      this.schedule = schedule.scheduleJob(this.rule(), this._handler(this.task.bind(this)));
+    })
   }
   
   _handler(fn) {
